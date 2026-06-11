@@ -51,8 +51,18 @@ Optional encoding that the input c file should be converted to, before being pas
 ### `--src-dir`
 Optional path to use when passing data over stdin to interpret relative path include statements.
 
-
 **NOTE:** Any additional arguments will be passed through to the MWCC executable.
+
+## Setup
+
+You will need to define empty macros for `INCLUDE_ASM` and `INCLUDE_RODATA` so that the MWCC compiler does not choke.
+
+Create an `include_asm.h` header with the following content and ensure it is included as part of your compile process (e.g. from within your `common.h` header).
+
+```c
+#define INCLUDE_ASM(FOLDER, NAME)
+#define INCLUDE_RODATA(FOLDER, NAME)
+```
 
 
 ## Quirks
@@ -63,7 +73,7 @@ Symbols that start with an `@` are not valid syntax. `mwccgap` will temporarily 
 
 ### foo$bar$baz
 
-Symbols that contain `$` are not valid synctax, `mwccgap` will temporarily rename these symbols during processing and also mark them as `static` (i.e. local to the file being compiled).
+Symbols that contain `$` are not valid syntax, `mwccgap` will temporarily rename these symbols during processing and also mark them as `static` (i.e. local to the file being compiled).
 
 ## Limitations
 
@@ -84,3 +94,7 @@ Projects that use `mwccgap` include:
 - <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/PSP_Logo.svg/330px-PSP_Logo.svg.png" alt="PSP" width="48"> [Castlevania: Symphony of the Night Decompilation](https://github.com/Xeeynamo/sotn-decomp)
 - <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/PlayStation_2_logo.png" alt="PS2" width="48"> [Street Fighter III: 3rd Strike](https://github.com/apstygo/sfiii-decomp)
 - <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/PlayStation_2_logo.png" alt="PS2" width="48"> [Shaun Palmer's Pro Snowboarder](https://github.com/Daniel-McCarthy/SPPS)
+- <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/PlayStation_wordmark_%281994-2009%29.svg" alt="PS1" width="48"> [Digimon World](https://github.com/jype0/dw_decomp)
+- <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/PlayStation_2_logo.png" alt="PS2" width="48"> [Silent Hill 3](https://github.com/dreamingmoths/memory-of-alessa)
+- <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/PlayStation_2_logo.png" alt="PS2" width="48"> [Monster Hunter](https://github.com/2Tie/mh1j)
+
